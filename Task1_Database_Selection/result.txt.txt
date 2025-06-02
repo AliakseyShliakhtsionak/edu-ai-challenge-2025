@@ -1,0 +1,62 @@
+Database Recommendation for Scalable Social Platform
+====================================================
+
+Chain-of-Thought Reasoning
+--------------------------
+
+1. Requirement: Social platform with millions of users
+   - Needs horizontal scalability and low-latency queries
+   - Relational databases struggle at this scale
+   - NoSQL systems preferred for scalability
+
+2. Requirement: Store user profiles, posts, and user connections
+   - User profiles: Structured and schema-flexible -> Document DB
+   - Posts: Large and flexible -> Document DB
+   - Connections (friendships/follows): Deeply relational -> Graph DB
+
+3. Requirement: High read speed
+   - 80% read workload
+   - Read-optimized systems with indexing and caching perform well
+   - Document and Graph DBs handle high read loads efficiently
+
+4. Requirement: 80% reads / 20% writes
+   - Favor read-optimized and eventually consistent systems
+   - Replication and read replicas useful
+
+5. Requirement: High scalability
+   - Distributed architecture, replication, auto-sharding
+   - NoSQL systems like MongoDB, Cassandra, Neo4j are ideal
+
+Recommendation: Polyglot Persistence Approach
+---------------------------------------------
+
+| Data Type        | Recommended Database              |
+|------------------|-----------------------------------|
+| User Profiles     | Document DB (MongoDB, Couchbase) |
+| Posts             | Document DB (MongoDB, DocumentDB)|
+| Connections       | Graph DB (Neo4j, Amazon Neptune) |
+| Hot Reads / Cache | In-memory DB (Redis)             |
+
+Final Recommendation
+---------------------
+
+1. Primary Datastore:
+   - MongoDB (Document DB) for profiles and posts:
+     - Schema flexibility
+     - High read performance
+     - Horizontal scalability
+     - Built-in replication and sharding
+
+2. Secondary for Connections:
+   - Neo4j or Amazon Neptune (Graph DB) for social graph:
+     - Fast traversal
+     - Supports complex queries for relationships
+
+3. Caching Layer (Optional but Recommended):
+   - Redis for hot data (feeds, profiles)
+
+Bonus Tips
+----------
+- Use microservices to separate user, post, and graph services
+- Maintain eventual consistency via messaging (e.g., Kafka)
+
