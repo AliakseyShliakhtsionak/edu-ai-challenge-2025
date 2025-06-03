@@ -1,0 +1,24 @@
+Title
+404 Not Found Error When Accessing /customers/ClientId/{id} Endpoint Due to Missing API Registration in Azure API Management
+
+Description
+A 404 Not Found HTTP error is encountered when attempting to access the endpoint `https://someSite/customers/ClientId/12345`. This issue appears to be caused by the API not being registered or exposed within Azure API Management (APIM). As a result, requests to the endpoint are not properly routed, leading to failed API calls.
+
+Steps to Reproduce
+1. Open a browser or use an API client (e.g., Postman or curl).  
+2. Send a GET request to `https://someSite/customers/ClientId/12345`.  
+3. Observe the returned HTTP status code and response body.
+
+Expected vs Actual Behavior
+- Expected Behavior: The endpoint should return a valid HTTP 200 OK response with the customer data associated with `ClientId` 12345.  
+- Actual Behavior: The endpoint returns an HTTP 404 Not Found error, indicating that the resource could not be located.
+
+Environment
+- API Gateway: Azure API Management (APIM)  
+- Endpoint: `https://someSite/customers/ClientId/{id}`  
+- Affected Service: Customer Data API  
+- Method: GET  
+- Client: Any (browser, Postman, etc.)
+
+Severity or Impact
+High – This issue prevents clients from accessing critical customer information via the `/customers/ClientId/{id}` endpoint. It impacts integration functionality and could block downstream applications or services that depend on this API.
